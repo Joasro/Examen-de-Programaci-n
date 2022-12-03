@@ -1,0 +1,115 @@
+Panel New Version
+
+class Contorno extends JFrame{
+	public Contorno() {
+		setBounds(300,300,300,300);
+		setTitle("Word 2 junto con Bloc de Notas");
+		add(new Panel());
+	}
+}
+
+class Panel extends JPanel{
+	public Panel() {
+		
+		//-huevada
+		JPanel  panelmenu = new JPanel();
+		
+		Menu = new JMenuBar();
+		archivo = new JMenu("Archivo");
+		editar =  new JMenu("Editar");
+		apariencia = new JMenu("Apariencia");
+		onl =  new JMenu("Online");
+		
+		Menu.add(archivo);
+		Menu.add(editar);
+		Menu.add(apariencia);
+		Menu.add(onl);
+		
+		///Menu-------------------------------------
+		creaitem("Nuevo", "archivo", "narchivo");
+		creaitem("Abrir...", "archivo", "abrir");
+		creaitem("Guardar", "archivo", "guarda");
+		creaitem("Guardar como", "archivo", "guardac");
+		//--------------------------------------------
+		
+		//--------------------------------------------
+		creaitem("Deshacer", "editar", "deshacer");
+		creaitem("Restaurar", "editar", "rehacer");
+		editar.addSeparator();
+		creaitem("Copiar", "editar", "copiar");
+		creaitem("Cortar", "editar", "cortar");
+		creaitem("Pegar", "editar", "pegar");
+		creaitem("Seleccionar Todo", "editar", "seleccion");
+		//--------------------------------------------
+		
+		
+		//--------------------------------------------
+		creaitem("Normal", "apariencia", "normal");
+		creaitem("Oscuro", "apariencia", "dark");
+		//--------------------------------------------
+		
+		
+		//--------------------------------------------
+		creaitem("Abrir desde Internet", "onl", "");
+	    //--------------------------------------------
+				
+		
+		panelmenu.add(Menu);
+		
+		//**huevada fin-------------------------------
+		
+		
+		//***textual****------------------------------
+		elPane = new JTabbedPane(); 
+		
+		listFile = new ArrayList<File>();
+		listAreaTexto = new ArrayList<JTextPane>();
+		listScroll = new ArrayList<JScrollPane>();
+		listManager = new ArrayList<UndoManager>();
+		
+		//**fin***------------------------
+		
+		//--------------------------------
+		herramientas = new JToolBar(JToolBar.VERTICAL);
+	    url = Main.class.getResource("/buezo/joaquin/img/marca-x.png");
+	    Funciones.addButton(url, herramientas, "Cerra Pestaña").addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				int seleccion = elPane.getSelectedIndex();
+				if(seleccion != -1) {
+					listScroll.get(elPane.getSelectedIndex()).setRowHeader(null);
+					elPane.remove(seleccion);
+					listAreaTexto.remove(seleccion);
+					listScroll.remove(seleccion);
+					listManager.remove(seleccion);
+					listFile.remove(seleccion);
+					
+					contadorp--;
+					
+					if(elPane.getSelectedIndex() == -1) {
+						existePanel = false;
+					}
+				}
+			}
+	    	
+	    });
+	    
+	    url = Main.class.getResource("/buezo/joaquin/img/mas (1).png");
+	    Funciones.addButton(url, herramientas, "Nuevo Archivo").addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				creaPanel();
+			}
+	    	
+	    });
+		//--------------------------------
+		
+		
+		add(panelmenu);
+		add(elPane);
+		add(herramientas);
+	}
