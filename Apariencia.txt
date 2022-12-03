@@ -1,0 +1,27 @@
+Funcion de Apariencia
+
+	public static void aFondo(int contador, String tipo, ArrayList<JTextPane> list ) {
+		if(tipo.equals("w")) {
+			for(int i = 0; i<contador; i++) {
+				StyleContext sc = StyleContext.getDefaultStyleContext();
+				
+				AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, Color.BLACK);
+				
+				aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Arial");
+				
+				list.get(i).setCharacterAttributes(aset, false);
+				list.get(i).setBackground(Color.WHITE);
+			}
+			
+		} else if (tipo.equals("d")) {
+			for (int i = 0; i < contador; i++) {
+				StyleContext sc = StyleContext.getDefaultStyleContext();
+
+				AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, new Color(161, 145, 123));
+
+				aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Arial");
+
+				list.get(i).setCharacterAttributes(aset, false);
+				list.get(i).setBackground(new Color(32, 33, 36));
+			}
+		}
